@@ -18,7 +18,7 @@ export function Chat() {
         ...prevMessages,
         { role: "assistant", content: "" }, // Empty content for now
       ]);
-      const stream = await handleAgentApiCall(message);
+      const stream = await handleAgentApiCall(message, messages);
       let accumulatedMessage = "";
 
       for await (const chunk of stream) {

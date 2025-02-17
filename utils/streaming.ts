@@ -16,13 +16,13 @@ export async function* getIterableStream(
     }
 }
 
-export async function handleAgentApiCall(message: string) {
+export async function handleAgentApiCall(message: string, messages:any) {
     const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/chat`, { // Note the /stream endpoint
         method: "POST",
         headers: {
             "Content-Type": "application/json",
         },
-        body: JSON.stringify({ query: message }),
+        body: JSON.stringify({ query: message, messages:messages }),
     });
 
     if (!response.ok) {
