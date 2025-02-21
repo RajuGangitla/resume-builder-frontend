@@ -6,12 +6,12 @@ import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/com
 
 export const Overview = () => {
   const features = [
-    {
-      icon: <Upload className="h-6 w-6" />,
-      title: "Upload Your Files",
-      description: "Simply upload your documents to get started.",
-      color: "bg-blue-500",
-    },
+    // {
+    //   icon: <Upload className="h-6 w-6" />,
+    //   title: "Upload Your Files",
+    //   description: "Simply upload your documents to get started.",
+    //   color: "bg-blue-500",
+    // },
     {
       icon: <MessageSquare className="h-6 w-6" />,
       title: "Ask Questions",
@@ -30,23 +30,23 @@ export const Overview = () => {
   return (
     <motion.div
       key="overview"
-      className="max-w-4xl mx-auto mt-10 md:mt-20 px-4"
+      className="mx-auto mt-10 md:mt-20 px-4"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -20 }}
       transition={{ duration: 0.5 }}
     >
-      <Card className="border-none shadow-lg overflow-hidden bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 dark:from-gray-800 dark:via-gray-900 dark:to-gray-950">
+      <Card className="border-none shadow-lg overflow-hidden">
         <CardHeader className="text-center relative z-10">
           <CardTitle className="text-3xl font-bold mb-2 bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600">
-            Welcome to Your Personal RAG Assistant
+            Welcome to Ai Resume Builder
           </CardTitle>
           <CardDescription className="text-lg">
             Unlock the power of Retrieval-Augmented Generation for accurate, context-aware answers.
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <div className="grid gap-6 mt-6 md:grid-cols-3">
+          <div className="grid gap-6 mt-6 md:grid-cols-2">
             {features.map((feature, index) => (
               <motion.div
                 key={index}

@@ -56,23 +56,29 @@ export function Chat() {
 
   return (
     <>
-      <div className="flex flex-col min-w-0 h-dvh bg-background">
-        <Messages
-          isLoading={isLoading}
-          messages={messages}
-        />
-
-        <form className="flex mx-auto px-4 bg-background pb-4 md:pb-6 gap-2 w-full md:max-w-3xl">
-          <MultimodalInput
-            input={input}
-            setInput={setInput}
-            isLoading={false}
+      <div className="flex gap-2">
+        <div className="flex flex-col w-1/2 h-dvh bg-background">
+          <Messages
+            isLoading={isLoading}
             messages={messages}
-            setMessages={setMessages}
-            onSubmit={handleSubmit}
           />
-        </form>
+
+          <form className="flex mx-auto px-4 bg-background pb-4 md:pb-6 gap-2 w-full md:max-w-3xl">
+            <MultimodalInput
+              input={input}
+              setInput={setInput}
+              isLoading={false}
+              messages={messages}
+              setMessages={setMessages}
+              onSubmit={handleSubmit}
+            />
+          </form>
+        </div>
+        <div className="w-1/2 h-dvh bg-muted">
+          <p>Hellooooooooo</p>
+        </div>
       </div>
+
 
     </>
   );
