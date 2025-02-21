@@ -4,33 +4,59 @@ import { useState } from 'react';
 import { MultimodalInput } from './multimodal-input';
 import { Messages } from './messages';
 import { handleAgentApiCall } from '@/utils/streaming';
+import ResumeForm from './resume-section';
+import { Resume } from '@/types/resume';
 
 export function Chat() {
   const [messages, setMessages] = useState<any>([]);
   const [input, setInput] = useState<string>("");
   const [isLoading, setIsLoading] = useState(false);
+  const [resume, setResume] = useState<Resume>()
 
+  // async function handleApiCall(message: string) {
+  //   try {
+  //     setMessages((prevMessages: any) => [
+  //       ...prevMessages,
+  //       { role: "assistant", content: "" }, // Empty content for now
+  //     ]);
+  //     const stream = await handleAgentApiCall(message, messages);
+  //     let accumulatedMessage = "";
+
+  //     for await (const chunk of stream) {
+  //       accumulatedMessage += chunk;
+
+  //       // Update the last message in the messages array
+  //       setMessages((prevMessages: any) => {
+  //         const updatedMessages = [...prevMessages];
+  //         updatedMessages[updatedMessages.length - 1].content = accumulatedMessage;
+  //         return updatedMessages;
+  //       });
+  //     }
+  //   } catch (error) {
+  //     console.error('Error:', error);
+  //     setMessages((prevMessages: any) => [
+  //       ...prevMessages,
+  //       { role: 'assistant', content: 'Sorry, there was an error processing your request.' },
+  //     ]);
+  //   } finally {
+  //     setIsLoading(false);
+  //   }
+  // }
 
   async function handleApiCall(message: string) {
     try {
-
       setMessages((prevMessages: any) => [
         ...prevMessages,
         { role: "assistant", content: "" }, // Empty content for now
       ]);
-      const stream = await handleAgentApiCall(message, messages);
-      let accumulatedMessage = "";
-
-      for await (const chunk of stream) {
-        accumulatedMessage += chunk;
-
-        // Update the last message in the messages array
-        setMessages((prevMessages: any) => {
-          const updatedMessages = [...prevMessages];
-          updatedMessages[updatedMessages.length - 1].content = accumulatedMessage;
-          return updatedMessages;
-        });
-      }
+      const stream = await handleAgentApiCall(message);
+      setResume(stream?.resume_data)
+      console.log(stream?.resume_data, "stream?.resume_data")
+      setMessages((prevMessages: any) => {
+        const updatedMessages = [...prevMessages];
+        updatedMessages[updatedMessages.length - 1].content = stream?.content
+        return updatedMessages;
+      });
     } catch (error) {
       console.error('Error:', error);
       setMessages((prevMessages: any) => [
@@ -56,7 +82,7 @@ export function Chat() {
 
   return (
     <>
-      <div className="flex gap-2">
+      <div className="flex">
         <div className="flex flex-col w-1/2 h-dvh bg-background">
           <Messages
             isLoading={isLoading}
@@ -75,7 +101,7 @@ export function Chat() {
           </form>
         </div>
         <div className="w-1/2 h-dvh bg-muted">
-          <p>Hellooooooooo</p>
+          <ResumeForm resume={resume} setResume={setResume} />
         </div>
       </div>
 
