@@ -35,7 +35,7 @@ export async function* getIterableStream(
 //     return response.body
 // }
 
-export async function handleAgentApiCall(message: string) {
+export async function handleAgentApiCall(message: string, uuid:string) {
     try {
         const url = `${process.env.NEXT_PUBLIC_API_URL}/chat`;
         
@@ -45,7 +45,8 @@ export async function handleAgentApiCall(message: string) {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({ // Properly send data in request body
-                query: message
+                query: message,
+                session_id:uuid
             })
         });
 
@@ -61,3 +62,5 @@ export async function handleAgentApiCall(message: string) {
         throw error;
     }
 }
+
+

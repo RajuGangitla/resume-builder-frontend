@@ -21,6 +21,13 @@ export interface Personal {
     graduation_date: string;
     location: string;
   }
+
+  export interface Projects {
+    title:string
+    tech_stack:string[]
+    features:string[]
+    duration:string 
+  }
   
   export interface Skills {
     languages: string[];
@@ -30,8 +37,9 @@ export interface Personal {
   }
   
   export interface Resume {
-    personal: Personal;
-    experience: Experience[];
-    education: Education | null;
-    skills: Skills;
+    personal_section: Personal;
+    experience_section: Experience[] | [];
+    education_section: Education | null
+    skills_section: Skills;
+    projects_section:Projects[]
   }
